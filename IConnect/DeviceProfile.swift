@@ -2,11 +2,39 @@
 //  DeviceProfile.swift
 //  IConnect
 //
-//  Weight range → Bluetooth device name. When scale weight matches, we suggest auto-connect.
+//  Weight range or touch shape (oval) → Bluetooth device. Match by shape (e.g. AirPods oval on trackpad).
 //
 
 import Foundation
 
+// MARK: - Shape-based detection (oval shape on trackpad, e.g. AirPods case)
+struct ShapeProfile: Identifiable {
+    let id = UUID()
+    let name: String
+    let bluetoothSearchTerm: String
+    /// Aspect ratio (major/minor) range for the oval – AirPods case resting on trackpad is elongated.
+    let aspectRatioMin: Float
+    let aspectRatioMax: Float
+    /// Optional: ignore very small touches (noise).
+    let minMajor: Float
+
+    func matches(major: Float, minor: Float) -> Bool {
+        guard major >= minMajor, minor > 0 else { return false }
+        let ratio = major / minor
+        return ratio >= aspectRatioMin && ratio <= aspectRatioMax
+    }
+
+    static let airPodsOval = ShapeProfile(
+        name: "AirPods",
+        bluetoothSearchTerm: "AirPods",
+        aspectRatioMin: 1.2,
+        aspectRatioMax: 4.0,
+        minMajor: 3.0
+    )
+    static let presets: [ShapeProfile] = [.airPodsOval]
+}
+
+// MARK: - Weight-based (legacy)
 struct DeviceProfile: Identifiable, Codable, Equatable {
     var id: UUID
     var name: String           // e.g. "AirPods case"
