@@ -7,143 +7,63 @@ import SwiftUI
 
 struct ScaleView: View {
     @StateObject private var viewModel = ScaleViewModel()
-    @StateObject private var bluetoothManager = BluetoothManager()
     @State private var scaleCompression: CGFloat = 0
     @State private var displayShake = false
-    @State private var particleOffset: CGFloat = 0
     @State private var keyMonitor: Any?
-    
-    /// When weight is stable and matches a known gadget, suggest Bluetooth connect.
-    private var matchedProfile: DeviceProfile? {
-        guard viewModel.hasTouch, viewModel.currentWeight > 3 else { return nil }
-        return DeviceProfile.presets.first { $0.matches(weight: viewModel.currentWeight) }
-    }
     
     var body: some View {
         GeometryReader { geometry in
-            ZStack {
-                // Animated gradient background
-//                    LinearGradient(
-//                        colors: [
-//                            Color(red: 0.95, green: 0.97, blue: 1.0),
-//                            Color(red: 0.85, green: 0.92, blue: 0.98)
-//                        ],
-//                        startPoint: .topLeading,
-//                        endPoint: .bottomTrailing
-//                    )
-//                    .ignoresSafeArea()
+            VStack(spacing: geometry.size.height * 0.06) {
+                Spacer()
                 
-                VStack(spacing: geometry.size.height * 0.06) {
-                    // Title with subtitle directly underneath
-                    VStack(spacing: 8) {
-                        Text("IConnect")
-                            .font(.system(size: min(max(geometry.size.width * 0.05, 24), 42), weight: .bold, design: .rounded))
-                            .foregroundStyle(
-                                LinearGradient(
-                                    colors: [.blue, .teal, .cyan],
-                                    startPoint: .leading,
-                                    endPoint: .trailing
-                                )
-                            )
-                            .minimumScaleFactor(0.7)
-                            .lineLimit(1)
-                        
-                        Text("Weigh a gadget (e.g. AirPods)—then connect via Bluetooth")
-                            .font(.system(size: min(max(geometry.size.width * 0.022, 14), 18), weight: .medium))
-                            .foregroundStyle(.gray)
-                            .multilineTextAlignment(.center)
-                            .frame(maxWidth: geometry.size.width * 0.8)
-                            .opacity(viewModel.hasTouch ? 0 : 1)
-                            .animation(.easeInOut(duration: 0.5), value: viewModel.hasTouch)
-                    }
-                    .frame(height: max(geometry.size.height * 0.15, 80)) // Fixed height for title + subtitle
-                    .frame(maxWidth: .infinity) // Ensure full width for centering
-                    
+                // Big display: scale visualization + raw weight (grams)
+                HStack {
                     Spacer()
-                    
-                    // Cartoon Digital Scale - responsive size
-                    HStack {
-                        Spacer()
-                        CartoonScaleView(
-                            weight: viewModel.currentWeight,
-                            hasTouch: viewModel.hasTouch,
-                            compression: $scaleCompression,
-                            displayShake: $displayShake,
-                            scaleFactor: min(geometry.size.width / 700, geometry.size.height / 500)
-                        )
-                        Spacer()
-                    }
-                    
+                    CartoonScaleView(
+                        weight: viewModel.currentWeight,
+                        hasTouch: viewModel.hasTouch,
+                        compression: $scaleCompression,
+                        displayShake: $displayShake,
+                        scaleFactor: min(geometry.size.width / 700, geometry.size.height / 500)
+                    )
                     Spacer()
-                    
-                    // Weigh-to-connect: if weight matches a gadget (e.g. AirPods), offer Bluetooth connect
-                    if let profile = matchedProfile {
-                        VStack(spacing: 8) {
-                            Text("Likely: \(profile.name)")
-                                .font(.system(size: min(max(geometry.size.width * 0.022, 14), 18), weight: .semibold))
-                                .foregroundStyle(.teal)
-                            Button(action: {
-                                bluetoothManager.connect(toDeviceName: profile.bluetoothConnectSearchTerm)
-                            }) {
-                                HStack(spacing: 6) {
-                                    Image(systemName: "airpodspro")
-                                    Text("Connect via Bluetooth")
-                                        .font(.system(size: min(max(geometry.size.width * 0.018, 12), 16), weight: .medium))
-                                }
-                                .foregroundStyle(.white)
-                                .padding(.horizontal, 16)
-                                .padding(.vertical, 8)
-                                .background(RoundedRectangle(cornerRadius: 12).fill(.teal))
-                            }
-                            .buttonStyle(.plain)
-                            .disabled(bluetoothManager.isConnecting)
-                        }
-                        .padding(.bottom, 4)
-                    }
-                    
-                    // Fixed container for button to prevent jumping
-                    VStack(spacing: 10) {
-                        if viewModel.hasTouch {
-                            Text("Press spacebar or click to zero")
-                                .font(.system(size: min(max(geometry.size.width * 0.018, 12), 16), weight: .medium))
-                                .foregroundStyle(.gray)
-                        }
-                        
-                        Button(action: {
-                            viewModel.zeroScale()
-                        }) {
-                            HStack(spacing: 8) {
-                                Image(systemName: "arrow.clockwise")
-                                    .font(.system(size: min(max(geometry.size.width * 0.02, 14), 18), weight: .semibold))
-                                Text("Zero Scale")
-                                    .font(.system(size: min(max(geometry.size.width * 0.02, 14), 18), weight: .semibold))
-                            }
-                            .foregroundStyle(.white)
-                            .frame(width: min(max(geometry.size.width * 0.2, 140), 180), 
-                                   height: min(max(geometry.size.height * 0.08, 40), 55))
-                            .background(
-                                RoundedRectangle(cornerRadius: 25)
-                                    .fill(
-                                        LinearGradient(
-                                            colors: [.blue, .teal],
-                                            startPoint: .leading,
-                                            endPoint: .trailing
-                                        )
-                                    )
-                            )
-                        }
-                        .buttonStyle(.plain)
-                        .opacity(viewModel.hasTouch ? 1 : 0)
-                        .scaleEffect(viewModel.hasTouch ? 1 : 0.8)
-                        .animation(.spring(response: 0.4, dampingFraction: 0.8), value: viewModel.hasTouch)
-                    }
-                    .frame(height: min(max(geometry.size.height * 0.15, 80), 100)) // Fixed space for button + instruction
-                    .frame(maxWidth: .infinity) // Ensure full width for centering
                 }
-                .padding(.horizontal, max(geometry.size.width * 0.05, 20))
-                .padding(.vertical, max(geometry.size.height * 0.03, 20))
-                .frame(maxWidth: .infinity, maxHeight: .infinity) // Ensure the VStack takes full available space
+                
+                Spacer()
+                
+                // Zero scale (spacebar or button)
+                VStack(spacing: 10) {
+                    if viewModel.hasTouch {
+                        Text("Press spacebar or click to zero")
+                            .font(.system(size: min(max(geometry.size.width * 0.018, 12), 16), weight: .medium))
+                            .foregroundStyle(.gray)
+                    }
+                    Button(action: { viewModel.zeroScale() }) {
+                        HStack(spacing: 8) {
+                            Image(systemName: "arrow.clockwise")
+                                .font(.system(size: min(max(geometry.size.width * 0.02, 14), 18), weight: .semibold))
+                            Text("Zero")
+                                .font(.system(size: min(max(geometry.size.width * 0.02, 14), 18), weight: .semibold))
+                        }
+                        .foregroundStyle(.white)
+                        .frame(width: min(max(geometry.size.width * 0.2, 140), 180),
+                               height: min(max(geometry.size.height * 0.08, 40), 55))
+                        .background(
+                            RoundedRectangle(cornerRadius: 25)
+                                .fill(LinearGradient(colors: [.blue, .teal], startPoint: .leading, endPoint: .trailing))
+                        )
+                    }
+                    .buttonStyle(.plain)
+                    .opacity(viewModel.hasTouch ? 1 : 0)
+                    .scaleEffect(viewModel.hasTouch ? 1 : 0.8)
+                    .animation(.spring(response: 0.4, dampingFraction: 0.8), value: viewModel.hasTouch)
+                }
+                .frame(height: min(max(geometry.size.height * 0.15, 80), 100))
+                .frame(maxWidth: .infinity)
             }
+            .padding(.horizontal, max(geometry.size.width * 0.05, 20))
+            .padding(.vertical, max(geometry.size.height * 0.03, 20))
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
         }
         .focusable()
         .modifier(FocusEffectModifier())
