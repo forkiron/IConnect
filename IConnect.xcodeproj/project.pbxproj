@@ -24,6 +24,8 @@
 		93ABD0212E2E01E200668D4F /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93ABD0202E2E01E200668D4F /* HomeView.swift */; };
 		93ABD0222E2E01E300668D4F /* DeviceProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93ABD0232E2E01E300668D4F /* DeviceProfile.swift */; };
 		93ABD0242E2E01E400668D4F /* BluetoothManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93ABD0252E2E01E400668D4F /* BluetoothManager.swift */; };
+		93ABD0262E2E01E500668D4F /* PinArtView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93ABD0272E2E01E500668D4F /* PinArtView.swift */; };
+		93ABD0282E2E01E600668D4F /* PinArtViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93ABD0292E2E01E600668D4F /* PinArtViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -45,6 +47,8 @@
 		93ABD0202E2E01E200668D4F /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		93ABD0232E2E01E300668D4F /* DeviceProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceProfile.swift; sourceTree = "<group>"; };
 		93ABD0252E2E01E400668D4F /* BluetoothManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BluetoothManager.swift; sourceTree = "<group>"; };
+		93ABD0272E2E01E500668D4F /* PinArtView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinArtView.swift; sourceTree = "<group>"; };
+		93ABD0292E2E01E600668D4F /* PinArtViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinArtViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -93,6 +97,8 @@
 				93A095112E33359600E1E1D1 /* SettingsView.swift */,
 				77292AA12B931E03001CA3F6 /* IConnectView.swift */,
 				77292AA32B931E04001CA3F6 /* DebugView.swift */,
+				93ABD0272E2E01E500668D4F /* PinArtView.swift */,
+				93ABD0292E2E01E600668D4F /* PinArtViewModel.swift */,
 				77292AA52B931E05001CA3F6 /* ScaleView.swift */,
 				77292AA72B931E06001CA3F6 /* ScaleViewModel.swift */,
 				77292A8D2B931954001CA3F6 /* Preview Content */,
@@ -202,6 +208,8 @@
 				77292A9E2B931E02001CA3F6 /* WeighingViewModel.swift in Sources */,
 				77292AA02B931E03001CA3F6 /* IConnectView.swift in Sources */,
 				77292AA22B931E04001CA3F6 /* DebugView.swift in Sources */,
+				93ABD0262E2E01E500668D4F /* PinArtView.swift in Sources */,
+				93ABD0282E2E01E600668D4F /* PinArtViewModel.swift in Sources */,
 				77292AA42B931E05001CA3F6 /* ScaleView.swift in Sources */,
 				77292AA62B931E06001CA3F6 /* ScaleViewModel.swift in Sources */,
 				93A095122E33359600E1E1D1 /* SettingsView.swift in Sources */,
