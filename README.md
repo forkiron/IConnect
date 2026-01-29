@@ -26,6 +26,23 @@ The key insight is that trackpad pressure events are only generated when there's
 - **App Sandbox disabled** (required for low-level trackpad access)
 - **Xcode 16.0+** and **Swift 6.0+** (for development)
 
+### Optional: BluetoothConnector and blueutil
+
+- **BluetoothConnector** – for reliable connect/disconnect (especially AirPods) when you tap **Connect via Bluetooth**:
+  ```bash
+  brew install bluetoothconnector
+  ```
+- **blueutil** – so IConnect can turn Bluetooth **on** from the app when it’s off (otherwise it opens System Settings):
+  ```bash
+  brew install blueutil
+  ```
+
+If Bluetooth is off, IConnect will try `blueutil -p 1` first; if that’s not installed, it opens System Settings and shows “Turn on Bluetooth in System Settings, then tap Connect again.”
+
+### Background use
+
+IConnect stays running when you close the main window. A **menu bar icon** (AirPods-style) appears so you can reopen the app from **Open IConnect** or quit from **Quit IConnect**.
+
 ## Installation
 
 ### Option 1: Download DMG (Recommended)

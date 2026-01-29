@@ -98,6 +98,13 @@ struct ScaleView: View {
                             }
                             .buttonStyle(.plain)
                             .disabled(bluetoothManager.isConnecting)
+                            if let msg = bluetoothManager.lastError, !msg.isEmpty {
+                                Text(msg)
+                                    .font(.system(size: 12, weight: .medium))
+                                    .foregroundStyle(.orange)
+                                    .multilineTextAlignment(.center)
+                                    .frame(maxWidth: 320)
+                            }
                         }
                         .padding(.bottom, 4)
                     }
