@@ -84,7 +84,7 @@ struct ScaleView: View {
                                 .font(.system(size: min(max(geometry.size.width * 0.022, 14), 18), weight: .semibold))
                                 .foregroundStyle(.teal)
                             Button(action: {
-                                bluetoothManager.connect(toDeviceName: profile.bluetoothSearchTerm)
+                                bluetoothManager.connectToHeadphones()
                             }) {
                                 HStack(spacing: 6) {
                                     Image(systemName: "airpodspro")

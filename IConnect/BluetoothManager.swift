@@ -2,7 +2,7 @@
 //  BluetoothManager.swift
 //  IConnect
 //
-//  Lists paired Bluetooth devices and connects by name when you weigh a gadget (e.g. AirPods).
+//  Finds preexisting paired headphone/audio devices and connects to them.
 //
 
 import Foundation
@@ -11,6 +11,10 @@ import AppKit
 #if os(macOS)
 import IOBluetooth
 #endif
+
+/// Bluetooth Class of Device: Major class 0x04 = Audio (headphones, earbuds, etc.)
+private let kBluetoothDeviceClassMajorAudio: UInt32 = 0x04
+private let kBluetoothDeviceClassMajorMask: UInt32 = 0x1F
 
 @MainActor
 final class BluetoothManager: ObservableObject {
@@ -34,7 +38,34 @@ final class BluetoothManager: ObservableObject {
         #endif
     }
     
-    /// Connect to a paired device by name (e.g. "John's AirPods"). Opens Bluetooth prefs if not found.
+    /// Connect to a preexisting paired headphone/audio device. Picks first disconnected audio device and connects.
+    func connectToHeadphones() {
+        lastError = nil
+        isConnecting = true
+        defer { isConnecting = false }
+        
+        #if os(macOS)
+        guard let paired = IOBluetoothDevice.pairedDevices() as? [IOBluetoothDevice] else {
+            openBluetoothPreferences()
+            return
+        }
+        let audioDevices = paired.filter { device in
+            let major = (device.classOfDevice >> 8) & kBluetoothDeviceClassMajorMask
+            return major == kBluetoothDeviceClassMajorAudio
+        }
+        if let device = audioDevices.first(where: { !$0.isConnected() }) {
+            device.openConnection(nil)
+            return
+        }
+        if let device = audioDevices.first {
+            device.openConnection(nil)
+            return
+        }
+        #endif
+        openBluetoothPreferences()
+    }
+    
+    /// Connect to a paired device by name (fallback). Opens Bluetooth prefs if not found.
     func connect(toDeviceName name: String) {
         lastError = nil
         isConnecting = true
@@ -43,12 +74,13 @@ final class BluetoothManager: ObservableObject {
         #if os(macOS)
         if let paired = IOBluetoothDevice.pairedDevices() as? [IOBluetoothDevice],
            let device = paired.first(where: { ($0.name ?? "").localizedCaseInsensitiveContains(name) || ($0.addressString ?? "").contains(name) }) {
-            if device.isConnected() { return }
-            device.openConnection(nil)
+            if !device.isConnected() {
+                device.openConnection(nil)
+            }
             return
         }
         #endif
-        openBluetoothPreferences()
+        connectToHeadphones()
     }
     
     /// Open System Preferences > Bluetooth for manual connect.
