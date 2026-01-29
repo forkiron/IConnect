@@ -1,6 +1,6 @@
 # Scripts
 
-This directory contains helper scripts for the TrackWeight project.
+This directory contains helper scripts for the IConnect project.
 
 ## setup-signing.sh
 
@@ -41,7 +41,6 @@ The script will generate the values for these GitHub repository secrets:
 
 ### Attribution
 
-This script is part of the enhanced TrackWeight fork that adds automated build pipelines.
+This script is part of an enhanced fork that adds automated build pipelines.
 
-**Original TrackWeight project**: https://github.com/KrishKrosh/TrackWeight  
 **Created by**: Krish Shah (@KrishKrosh)

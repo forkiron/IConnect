@@ -1,6 +1,6 @@
 //
 //  ScaleViewModel.swift
-//  TrackWeight
+//  IConnect
 //
 
 import OpenMultitouchSupport

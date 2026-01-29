@@ -1,11 +1,11 @@
 //
-//  TrackWeightView.swift
-//  TrackWeight
+//  IConnectView.swift
+//  IConnect
 //
 
 import SwiftUI
 
-struct TrackWeightView: View {
+struct IConnectView: View {
     @StateObject private var viewModel = WeighingViewModel()
     
     var body: some View {
@@ -58,7 +58,7 @@ struct WelcomeView: View {
                 .font(.system(size: 80, weight: .ultraLight))
                 .foregroundStyle(.primary)
             
-            Text("TrackWeight")
+            Text("IConnect")
                 .font(.system(size: 36, weight: .bold, design: .rounded))
                 .foregroundStyle(.primary)
             
@@ -265,7 +265,6 @@ struct WeighingView: View {
     }
 }
 
-
 struct ResultView: View {
     let weight: Float
     let onRestart: () -> Void
@@ -312,5 +311,6 @@ struct ResultView: View {
 }
 
 #Preview {
-    TrackWeightView()
+    IConnectView()
 }
+

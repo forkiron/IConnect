@@ -1,6 +1,6 @@
 //
 //  WeighingState.swift
-//  TrackWeight
+//  IConnect
 //
 
 import Foundation

@@ -1,6 +1,6 @@
 //
 //  ContentView.swift
-//  TrackWeight
+//  IConnect
 //
 
 import SwiftUI
@@ -17,7 +17,7 @@ struct ContentView: View {
             .frame(minWidth: 700, minHeight: 500)
         } else {
             TabView(selection: $selectedTab) {
-                TrackWeightView()
+                IConnectView()
                     .tabItem {
                         Image(systemName: "arrow.3.trianglepath")
                         Text("Guided (Experimental)")

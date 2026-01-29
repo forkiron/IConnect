@@ -1,6 +1,6 @@
 //
 //  WeighingViewModel.swift
-//  TrackWeight
+//  IConnect
 //
 
 import OpenMultitouchSupport

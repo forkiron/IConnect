@@ -1,11 +1,10 @@
-# TrackWeight
+# IConnect
 
 **Turn your MacBook's trackpad into a precise digital weighing scale**
 
-[TrackWeight](
-https://x.com/KrishRShah/status/1947186835811193330) is a macOS application that transforms your MacBook's trackpad into an accurate weighing scale by leveraging the Force Touch pressure sensors built into modern MacBook trackpads.
+IConnect is a macOS application that transforms your MacBook's trackpad into an accurate weighing scale by leveraging the Force Touch pressure sensors built into modern MacBook trackpads.
 
-https://github.com/user-attachments/assets/7eaf9e0b-3dec-4829-b868-f54a8fd53a84
+Demo video: `https://github.com/user-attachments/assets/7eaf9e0b-3dec-4829-b868-f54a8fd53a84`
 
 To use it yourself:
 
@@ -16,7 +15,7 @@ To use it yourself:
 
 ## How It Works
 
-TrackWeight utilizes a custom fork of the [Open Multi-Touch Support library](https://github.com/krishkrosh/OpenMultitouchSupport) by [Takuto Nakamura](https://github.com/Kyome22) to gain private access to all mouse and trackpad events on macOS. This library provides detailed touch data including pressure readings that are normally inaccessible to standard applications.
+IConnect utilizes a custom fork of the [Open Multi-Touch Support library](https://github.com/krishkrosh/OpenMultitouchSupport) by [Takuto Nakamura](https://github.com/Kyome22) to gain private access to all mouse and trackpad events on macOS. This library provides detailed touch data including pressure readings that are normally inaccessible to standard applications.
 
 The key insight is that trackpad pressure events are only generated when there's capacitance detected on the trackpad surface - meaning your finger (or another conductive object) must be in contact with the trackpad. When this condition is met, the trackpad's Force Touch sensors provide precise pressure readings that can be calibrated and converted into weight measurements.
 
@@ -31,24 +30,19 @@ The key insight is that trackpad pressure events are only generated when there's
 
 ### Option 1: Download DMG (Recommended)
 
-1. Go to the [Releases](https://github.com/krishkrosh/TrackWeight/releases) page
-2. Download the latest TrackWeight DMG file
-3. Open the DMG and drag TrackWeight.app to your Applications folder
+1. Go to the [Releases](../../releases) page
+2. Download the latest IConnect DMG file
+3. Open the DMG and drag IConnect.app to your Applications folder
 4. Run the application (you may need to allow it in System Preferences > Security & Privacy for unsigned builds)
 
-### Option 2: Homebrew
-```bash
-brew install --cask krishkrosh/apps/trackweight --force
-```
- 
-### Option 3: Build from Source
+### Option 2: Build from Source
 
 1. Clone this repository
-2. Open `TrackWeight.xcodeproj` in Xcode
+2. Open `IConnect.xcodeproj` in Xcode
 3. Disable App Sandbox in the project settings (required for trackpad access)
 4. Build and run the application
 
-For more information about setting up the build pipeline, see [.github/workflows/README.md](.github/workflows/README.md).
+For more information about setting up the build pipeline, see `.github/workflows/README.md`.
 
 ### Calibration Process
 
@@ -88,5 +82,5 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## Disclaimer
 
-This application is for experimental and educational purposes. While efforts have been made to ensure accuracy, TrackWeight should not be used for critical measurements or commercial applications where precision is essential. Always verify measurements with a calibrated scale for important use cases.
-# IConnect
+This application is for experimental and educational purposes. While efforts have been made to ensure accuracy, IConnect should not be used for critical measurements or commercial applications where precision is essential. Always verify measurements with a calibrated scale for important use cases.
+

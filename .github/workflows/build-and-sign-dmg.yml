@@ -17,8 +17,8 @@ on:
         type: boolean
 
 env:
-  APP_NAME: TrackWeight
-  SCHEME: TrackWeight
+  APP_NAME: IConnect
+  SCHEME: IConnect
   CONFIGURATION: Release
 
 jobs:
@@ -58,7 +58,7 @@ jobs:
     - name: Build and Archive App
       run: |
         xcodebuild \
-          -project TrackWeight.xcodeproj \
+          -project IConnect.xcodeproj \
           -scheme ${{ env.SCHEME }} \
           -configuration ${{ env.CONFIGURATION }} \
           -archivePath "$RUNNER_TEMP/${{ env.APP_NAME }}.xcarchive" \
@@ -133,7 +133,7 @@ jobs:
         echo "🔏 Re-signing main application..."
         codesign --force --sign "Developer ID Application" \
           --options runtime \
-          --entitlements "TrackWeight/TrackWeight.entitlements" \
+          --entitlements "IConnect/IConnect.entitlements" \
           --timestamp \
           --deep \
           --strict \
@@ -277,13 +277,13 @@ jobs:
         tag_name: ${{ steps.version_info.outputs.version }}
         name: ${{ env.APP_NAME }} ${{ steps.version_info.outputs.version }}
         body: |
-          # TrackWeight ${{ steps.version_info.outputs.version }}
+          # IConnect ${{ steps.version_info.outputs.version }}
           
           Transform your MacBook's trackpad into a precise digital weighing scale!
           
           ## Installation
           1. Download the DMG file below
-          2. Open the DMG and drag TrackWeight.app to your Applications folder
+          2. Open the DMG and drag IConnect.app to your Applications folder
           3. Run the app and follow the setup instructions
           
           ## Requirements
@@ -306,11 +306,11 @@ jobs:
     - name: Summary
       run: |
         echo "## Build Summary" >> $GITHUB_STEP_SUMMARY
-        echo "✅ Successfully built and packaged TrackWeight DMG" >> $GITHUB_STEP_SUMMARY
+        echo "✅ Successfully built and packaged IConnect DMG" >> $GITHUB_STEP_SUMMARY
         echo "📦 DMG file: ${{ steps.version_info.outputs.dmg_name }}" >> $GITHUB_STEP_SUMMARY
         echo "🔗 Original repository: https://github.com/KrishKrosh/TrackWeight" >> $GITHUB_STEP_SUMMARY
         echo "" >> $GITHUB_STEP_SUMMARY
         echo "The DMG includes:" >> $GITHUB_STEP_SUMMARY
-        echo "- TrackWeight.app (signed and notarized if certificates provided)" >> $GITHUB_STEP_SUMMARY
+        echo "- IConnect.app (signed and notarized if certificates provided)" >> $GITHUB_STEP_SUMMARY
         echo "- Clean professional DMG with just the app and Applications link" >> $GITHUB_STEP_SUMMARY
         echo "- Proper code signing with hardened runtime enabled" >> $GITHUB_STEP_SUMMARY

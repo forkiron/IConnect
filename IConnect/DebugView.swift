@@ -1,6 +1,6 @@
 //
 //  DebugView.swift
-//  TrackWeight
+//  IConnect
 //
 //  Created by Takuto Nakamura on 2024/03/02.
 //

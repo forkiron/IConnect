@@ -1,6 +1,6 @@
 //
 //  ScaleView.swift
-//  TrackWeight
+//  IConnect
 //
 
 import SwiftUI
@@ -29,7 +29,7 @@ struct ScaleView: View {
                 VStack(spacing: geometry.size.height * 0.06) {
                     // Title with subtitle directly underneath
                     VStack(spacing: 8) {
-                        Text("Track Weight")
+                        Text("IConnect")
                             .font(.system(size: min(max(geometry.size.width * 0.05, 24), 42), weight: .bold, design: .rounded))
                             .foregroundStyle(
                                 LinearGradient(

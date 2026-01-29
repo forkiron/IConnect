@@ -1,14 +1,14 @@
 #!/bin/bash
 
 # setup-signing.sh
-# Helper script to set up code signing certificates for TrackWeight DMG builds
+# Helper script to set up code signing certificates for IConnect DMG builds
 # 
 # This script helps you prepare the necessary secrets for GitHub Actions
 # to build signed DMG files.
 
 set -e
 
-echo "🔐 TrackWeight Code Signing Setup"
+echo "🔐 IConnect Code Signing Setup"
 echo "=================================="
 echo ""
 echo "This script helps you set up code signing for automated DMG builds."

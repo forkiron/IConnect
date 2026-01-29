@@ -1,6 +1,6 @@
 //
 //  SettingsView.swift
-//  TrackWeight
+//  IConnect
 //
 
 import OpenMultitouchSupport

@@ -5,7 +5,7 @@
 
 set -e
 
-echo "🧪 Testing TrackWeight Build Workflow Locally"
+echo "🧪 Testing IConnect Build Workflow Locally"
 echo "=============================================="
 
 # Load environment variables from .env file
@@ -21,8 +21,8 @@ else
 fi
 
 # Configuration
-export APP_NAME="TrackWeight"
-export SCHEME="TrackWeight"
+export APP_NAME="IConnect"
+export SCHEME="IConnect"
 export CONFIGURATION="Release"
 export BUILD_DIR="$(pwd)/local_build"
 
@@ -34,7 +34,7 @@ echo ""
 echo "Step 1: Building and Archiving App (Universal Binary)"
 echo "====================================================="
 xcodebuild \
-  -project TrackWeight.xcodeproj \
+  -project IConnect.xcodeproj \
   -scheme "$SCHEME" \
   -configuration "$CONFIGURATION" \
   -archivePath "$BUILD_DIR/$APP_NAME.xcarchive" \
@@ -111,7 +111,7 @@ fi
     echo "🔏 Re-signing main application..."
     codesign --force --sign "Developer ID Application: Krish Shah (9ZRLG6277G)" \
       --options runtime \
-      --entitlements "TrackWeight/TrackWeight.entitlements" \
+      --entitlements "IConnect/IConnect.entitlements" \
       --timestamp \
       --deep \
       --strict \
