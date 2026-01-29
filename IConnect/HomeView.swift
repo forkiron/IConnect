@@ -31,7 +31,7 @@ struct HomeView: View {
             
             // Description section
             VStack(spacing: 20) {
-                Text("Transform your MacBook trackpad into a precision scale using Apple's private MultitouchSupport framework to read pressure values with gram-level accuracy.")
+                Text("Weigh your AirPods or other gadgets on the trackpad—then connect via Bluetooth automatically instead of opening Bluetooth settings.")
                     .font(.system(size: 18, weight: .medium))
                     .foregroundStyle(Color.primary)
                     .multilineTextAlignment(.center)

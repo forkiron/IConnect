@@ -21,6 +21,9 @@
     <true/>
     <key>com.apple.security.device.serial</key>
     <true/>
+    <!-- Bluetooth for auto-connect when weighing gadgets (e.g. AirPods) -->
+    <key>com.apple.security.device.bluetooth</key>
+    <true/>
     
     <!-- Network access (if needed) -->
     <key>com.apple.security.network.client</key>

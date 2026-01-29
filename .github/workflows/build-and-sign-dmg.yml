@@ -308,7 +308,6 @@ jobs:
         echo "## Build Summary" >> $GITHUB_STEP_SUMMARY
         echo "✅ Successfully built and packaged IConnect DMG" >> $GITHUB_STEP_SUMMARY
         echo "📦 DMG file: ${{ steps.version_info.outputs.dmg_name }}" >> $GITHUB_STEP_SUMMARY
-        echo "🔗 Original repository: https://github.com/KrishKrosh/TrackWeight" >> $GITHUB_STEP_SUMMARY
         echo "" >> $GITHUB_STEP_SUMMARY
         echo "The DMG includes:" >> $GITHUB_STEP_SUMMARY
         echo "- IConnect.app (signed and notarized if certificates provided)" >> $GITHUB_STEP_SUMMARY

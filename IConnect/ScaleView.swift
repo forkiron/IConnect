@@ -7,10 +7,17 @@ import SwiftUI
 
 struct ScaleView: View {
     @StateObject private var viewModel = ScaleViewModel()
+    @StateObject private var bluetoothManager = BluetoothManager()
     @State private var scaleCompression: CGFloat = 0
     @State private var displayShake = false
     @State private var particleOffset: CGFloat = 0
     @State private var keyMonitor: Any?
+    
+    /// When weight is stable and matches a known gadget, suggest Bluetooth connect.
+    private var matchedProfile: DeviceProfile? {
+        guard viewModel.hasTouch, viewModel.currentWeight > 3 else { return nil }
+        return DeviceProfile.presets.first { $0.matches(weight: viewModel.currentWeight) }
+    }
     
     var body: some View {
         GeometryReader { geometry in
@@ -41,7 +48,7 @@ struct ScaleView: View {
                             .minimumScaleFactor(0.7)
                             .lineLimit(1)
                         
-                        Text("Place your finger on the trackpad to begin")
+                        Text("Weigh a gadget (e.g. AirPods)—then connect via Bluetooth")
                             .font(.system(size: min(max(geometry.size.width * 0.022, 14), 18), weight: .medium))
                             .foregroundStyle(.gray)
                             .multilineTextAlignment(.center)
@@ -68,6 +75,31 @@ struct ScaleView: View {
                     }
                     
                     Spacer()
+                    
+                    // Weigh-to-connect: if weight matches a gadget (e.g. AirPods), offer Bluetooth connect
+                    if let profile = matchedProfile {
+                        VStack(spacing: 8) {
+                            Text("Likely: \(profile.name)")
+                                .font(.system(size: min(max(geometry.size.width * 0.022, 14), 18), weight: .semibold))
+                                .foregroundStyle(.teal)
+                            Button(action: {
+                                bluetoothManager.connect(toDeviceName: profile.bluetoothConnectSearchTerm)
+                            }) {
+                                HStack(spacing: 6) {
+                                    Image(systemName: "airpodspro")
+                                    Text("Connect via Bluetooth")
+                                        .font(.system(size: min(max(geometry.size.width * 0.018, 12), 16), weight: .medium))
+                                }
+                                .foregroundStyle(.white)
+                                .padding(.horizontal, 16)
+                                .padding(.vertical, 8)
+                                .background(RoundedRectangle(cornerRadius: 12).fill(.teal))
+                            }
+                            .buttonStyle(.plain)
+                            .disabled(bluetoothManager.isConnecting)
+                        }
+                        .padding(.bottom, 4)
+                    }
                     
                     // Fixed container for button to prevent jumping
                     VStack(spacing: 10) {

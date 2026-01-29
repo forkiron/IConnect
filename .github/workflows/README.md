@@ -11,7 +11,6 @@ This workflow builds, signs (if certificates are provided), and packages the ICo
 - **Automated Building**: Builds the Xcode project using the latest stable Xcode
 - **Code Signing**: Supports optional code signing with certificates
 - **DMG Creation**: Creates a professional DMG with proper layout and attribution
-- **Attribution**: Includes proper credits to the original repository (https://github.com/KrishKrosh/TrackWeight)
 - **Release Integration**: Can create GitHub releases with the built DMG
 - **Artifact Upload**: Uploads DMG as a GitHub Actions artifact
 

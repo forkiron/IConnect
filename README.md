@@ -1,17 +1,17 @@
 # IConnect
 
-**Turn your MacBook's trackpad into a precise digital weighing scale**
+**Weigh your gadgets, connect via Bluetooth automatically**
 
-IConnect is a macOS application that transforms your MacBook's trackpad into an accurate weighing scale by leveraging the Force Touch pressure sensors built into modern MacBook trackpads.
+IConnect turns your MacBook trackpad into a precision scale and **automates Bluetooth connection**: when you weigh your AirPods (or other gadgets), the app recognizes the weight and offers to connect to that device—no more manually opening Bluetooth settings and tapping Connect.
 
-Demo video: `https://github.com/user-attachments/assets/7eaf9e0b-3dec-4829-b868-f54a8fd53a84`
+- **Weigh** objects (e.g. AirPods case, earbuds case) on the trackpad for gram-level readings.
+- **Auto-connect**: If the weight matches a known gadget (e.g. AirPods case ~45g), IConnect suggests connecting via Bluetooth and can open Bluetooth preferences or connect to a paired device by name.
 
-To use it yourself:
+To use it:
 
 1. Open the scale
-2. Rest your finger on the trackpad
-3. While maintaining finger contact, put your object on the trackpad
-4. Try to put as little pressure on the trackpad while still maintaining contact. This is the weight of your object
+2. Rest your finger on the trackpad, then place your object (e.g. AirPods case) on the trackpad
+3. Read the weight; if it matches a gadget profile, tap **Connect via Bluetooth** to connect instead of opening System Preferences manually
 
 ## How It Works
 
